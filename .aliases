@@ -1,1 +1,5 @@
 alias la="ls -a"
+alias ll="ls -l"
+alias lla="ll -a"
+alias c="clear"
+alias grepc="grep --color"

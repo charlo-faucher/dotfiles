@@ -1,0 +1,18 @@
+#!/bin/bash
+
+dirMakeGo()
+{
+mkdir $1
+cd `pwd`/$1
+}
+
+touchVim()
+{
+touch $1
+nvim $1
+}
+
+mygrep()
+{
+grep -i $1 $2
+}
