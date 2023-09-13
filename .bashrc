@@ -135,5 +135,3 @@ ex ()
     echo "'$1' is not a valid file"
   fi
 }
-
-export PATH=$PATH:/~/bin/

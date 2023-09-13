@@ -1,21 +1,17 @@
-echo "Bonjour cfaucher"
+echo "Début de la session - $USER"
 
-source /home/cfaucher/.aliases
-source /home/cfaucher/.functions
-
-PS1=" [%2d] $ "
-
-export PATH=$PATH:/~/bin/
+source ~/.aliases
+source ~/.functions
 
 # Use powerline
-#USE_POWERLINE="true"
+USE_POWERLINE="true"
 # Source manjaro-zsh-configuration
-#if [[ -e /usr/share/zsh/manjaro-zsh-config ]]; then
-#  source /usr/share/zsh/manjaro-zsh-config
-#fi
+if [[ -e /usr/share/zsh/manjaro-zsh-config ]]; then
+  source /usr/share/zsh/manjaro-zsh-config
+fi
 # Use manjaro zsh prompt
-#if [[ -e /usr/share/zsh/manjaro-zsh-prompt ]]; then
-#  source /usr/share/zsh/manjaro-zsh-prompt
-#fi
+if [[ -e /usr/share/zsh/manjaro-zsh-prompt ]]; then
+  source /usr/share/zsh/manjaro-zsh-prompt
+fi
 
 
