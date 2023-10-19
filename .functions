@@ -1,0 +1,7 @@
+#!/bin/bash
+
+dirGo()
+{
+mkdir $1
+cd `pwd`/$1
+}
