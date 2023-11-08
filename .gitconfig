@@ -1,4 +1,3 @@
-git config --global user.name charlo-faucher
-git config --global user.email fauchercharlo@gmail.com
-sudo git config --system core.editor "nvim"
-sudo git config --system user.name charlo-faucher
+[user]
+	email = fauchercharlo@gmail.com
+	name = charlo-faucher
