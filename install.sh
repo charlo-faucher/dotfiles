@@ -1,9 +1,30 @@
-#!/bin/zsh
+#!/usr/bin/env bash
 
-mkdir ~/bin ~/cegep ~/projets
+set -e
 
-sudo pacman -Sy git neovim gcc gdb python3 python-pip kitty tree
+echo "Detecting OS..."
+case "$(uname -s)" in
+  Linux*)
+    if [ -f /etc/arch-release ]; then
+      echo "ARCH installation!"
+      bash setup/base/arch.sh
+    elif [ -f /etc/lsb-release ]; then
+      echo "Ubuntu installation!"
+      bash setup/base/ubuntu.sh
+    else
+      echo "Unsupported Linux distro"
+      exit 1
+    fi
+    ;;
+  Darwin*)
+    echo "MacOS installation!"
+    bash setup/base/mac.sh
+    ;;
+  *)
+    echo "Unsupported OS"
+    exit 1
+    ;;
+esac
 
-cp -fu dotfiles/.zshrc ~
-cp -fu dotfiles/.aliases ~
-cp -fu dotfiles/.functions ~
+# Deploy configs with stow
+stow -t "$HOME" config
