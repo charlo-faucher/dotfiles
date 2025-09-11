@@ -8,11 +8,11 @@ plugins=(git z fzf)
 source $ZSH/oh-my-zsh.sh
 
 # Load custom configs
-source $HOME/dotfiles/config/zsh/common.zsh
+source $HOME/dotfiles/config/shell/common.zsh
 
 case "$(uname -s)" in
-  Linux*)  source $HOME/dotfiles/config/zsh/linux.zsh ;;
-  Darwin*) source $HOME/dotfiles/config/zsh/mac.zsh ;;
+  Linux*)  source $HOME/dotfiles/config/shell/linux.zsh ;;
+  Darwin*) source $HOME/dotfiles/config/shell/mac.zsh ;;
 esac
 
 # Load aliases

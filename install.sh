@@ -26,5 +26,29 @@ case "$(uname -s)" in
     ;;
 esac
 
-# Deploy configs with stow
-stow -t "$HOME" config
+echo "Setting up zsh as default shell..."
+
+# Prefer common zsh locations over /usr/sbin/zsh
+if [ -x /bin/zsh ]; then
+  ZSH_PATH=/bin/zsh
+elif [ -x /usr/bin/zsh ]; then
+  ZSH_PATH=/usr/bin/zsh
+elif [ -x /usr/local/bin/zsh ]; then
+  ZSH_PATH=/usr/local/bin/zsh
+else
+  # fallback (whatever which finds)
+  ZSH_PATH=$(command -v zsh)
+fi
+
+# Ensure it's listed in /etc/shells
+if ! grep -qx "$ZSH_PATH" /etc/shells; then
+  echo "$ZSH_PATH" | sudo tee -a /etc/shells
+fi
+
+# Change default shell
+chsh -s "$ZSH_PATH"
+
+echo "Default shell set to: $ZSH_PATH"
+
+echo "Deploying dotfiles with stow..."
+stow -d config -t $HOME zsh 
