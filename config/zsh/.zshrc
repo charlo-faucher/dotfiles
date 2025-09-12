@@ -3,7 +3,7 @@ export ZSH="$HOME/dotfiles/config/zsh/oh-my-zsh"
 
 # Load oh-my-zsh
 ZSH_THEME="bureau"
-plugins=(git z fzf)
+#plugins=(git z fzf)
 
 source $ZSH/oh-my-zsh.sh
 
