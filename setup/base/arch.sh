@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
-pacman -Syu zsh stow git neovim
+# Install base packages
+pacman -Syu zsh stow git neovim tree 
