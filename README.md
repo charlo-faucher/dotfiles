@@ -2,31 +2,10 @@
 
 TODO introduction
 
-## Preparations
-
-Todo text
-
-#### Install packet manager (brew)
-```bash
-TODO
-```
-
-### Install stow
-
-#### Mac
-```bash
-TODO
-```
-
-#### Arch
-```bash
-TODO
-```
-
-#### Ubuntu
-```bash
-TODO
-```
-
 ## Set-up
-TODO
+
+### Clone the repo
+```bash
+git clone --recursive https://github.com/charlo-faucher/dotfiles.git ~/dotfiles
+```
+
