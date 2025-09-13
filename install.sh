@@ -51,4 +51,4 @@ chsh -s "$ZSH_PATH"
 echo "Default shell set to: $ZSH_PATH"
 
 echo "Deploying dotfiles with stow..."
-stow -d config -t $HOME zsh
+stow -d config -t $HOME zsh .config
