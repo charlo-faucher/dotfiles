@@ -2,5 +2,5 @@
 	path = config/zsh/.config/oh-my-zsh
 	url = https://github.com/ohmyzsh/ohmyzsh.git
 [submodule "config/tmux/.config/tmux"]
-	path = config/tmux/.config/tmux
+	path = config/tmux/tmux
 	url = https://github.com/gpakosz/.tmux.git
