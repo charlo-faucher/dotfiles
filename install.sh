@@ -56,7 +56,7 @@ echo ">>> Ensuring tmux configuration..."
 mkdir -p "$HOME/.config/tmux"
 
 if [ ! -f "$HOME/.config/tmux/tmux.conf" ]; then
-  ln -s "$DOTFILES_DIR/config/tmux/.tmux.conf" \
+  ln -s "$DOTFILES_DIR/config/tmux/.tmux/.tmux.conf" \
      "$HOME/.config/tmux/tmux.conf" 
 fi
 
