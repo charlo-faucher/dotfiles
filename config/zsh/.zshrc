@@ -5,7 +5,7 @@ export ZSH="$HOME/dotfiles/config/zsh/.config/oh-my-zsh"
 ZSH_THEME="bureau"
 #plugins=(git z fzf)
 
-source $ZSH/.config/oh-my-zsh.sh
+source $ZSH/oh-my-zsh.sh
 
 # Load custom configs
 source $HOME/dotfiles/config/shell/common.zsh

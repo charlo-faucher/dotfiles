@@ -2,15 +2,18 @@
 
 set -e
 
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$DOTFILES_DIR"
+
 echo "Detecting OS..."
 case "$(uname -s)" in
   Linux*)
     if [ -f /etc/arch-release ]; then
       echo "ARCH installation!"
-      bash setup/base/arch.sh
+      bash "$DOTFILES_DIR/setup/base/arch.sh"
     elif [ -f /etc/lsb-release ]; then
       echo "Ubuntu installation!"
-      bash setup/base/ubuntu.sh
+      bash "$DOTFILES_DIR/setup/base/ubuntu.sh"
     else
       echo "Unsupported Linux distro"
       exit 1
@@ -18,7 +21,7 @@ case "$(uname -s)" in
     ;;
   Darwin*)
     echo "MacOS installation!"
-    bash setup/base/mac.sh
+    bash "$DOTFILES_DIR/setup/base/mac.sh"
     ;;
   *)
     echo "Unsupported OS"
@@ -51,4 +54,4 @@ chsh -s "$ZSH_PATH"
 echo "Default shell set to: $ZSH_PATH"
 
 echo "Deploying dotfiles with stow..."
-stow -d config -t $HOME zsh nvim tmux
+stow -d "$DOTFILES_DIR/config" -t $HOME zsh nvim tmux
