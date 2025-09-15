@@ -17,3 +17,6 @@ esac
 
 # Load aliases
 source $HOME/dotfiles/aliases/.aliases-common
+
+# Use tmux config
+export TMUX_CONF="$HOME/.config/tmux/tmux.conf"

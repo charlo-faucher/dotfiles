@@ -3,6 +3,7 @@ set -euo pipefail
 
 DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
 
+
 echo ">>> Detecting OS..."
 case "$(uname -s)" in
   Linux*)
@@ -26,8 +27,10 @@ case "$(uname -s)" in
     ;;
 esac
 
+
 echo ">>> Initializing submodules..."
 git -C "$DOTFILES_DIR" submodule update --init --recursive
+
 
 echo ">>> Setting zsh as default shell (if available)..."
 if command -v zsh >/dev/null; then
@@ -42,9 +45,22 @@ else
   echo ">>> zsh not installed, skipping default shell change."
 fi
 
+
 echo ">>> Deploying dotfiles with stow..."
 cd "$DOTFILES_DIR"
-stow -t "$HOME" config
+stow -d "$DOTFILES_DIR/config" -t $HOME zsh nvim
+
+
+echo ">>> Ensuring tmux configuration..."
+if [ ! -f "$HOME/.config/tmux/tmux.conf.local" ]; then
+  cp "$DOTFILES_DIR/config/tmux/.config/tmux/tmux.conf.local" \
+     "$HOME/.config/tmux/tmux.conf.local"
+fi
+
+if [ ! -L "$HOME/.tmux.conf" ]; then
+  ln -sfn "$HOME/.config/tmux/tmux.conf" "$HOME/.tmux.conf"
+fi
+
 
 echo ">>> Done! Restart your shell to apply changes."
 
