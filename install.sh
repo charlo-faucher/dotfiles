@@ -48,17 +48,17 @@ fi
 
 echo ">>> Deploying dotfiles with stow..."
 cd "$DOTFILES_DIR"
-stow -d "$DOTFILES_DIR/config" -t $HOME zsh nvim tmux
+stow -d "$DOTFILES_DIR/config" -t $HOME zsh nvim
 
 
 echo ">>> Ensuring tmux configuration..."
 if [ ! -f "$HOME/.config/tmux/tmux.conf" ]; then
-  ln -s "$HOME/.config/tmux/.tmux.conf" \
+  ln -s "$DOTFILES_DIR/config/tmux/.tmux.conf" \
      "$HOME/.config/tmux/tmux.conf"
 fi
 
 if [ ! -f "$HOME/.config/tmux/tmux.conf.local" ]; then
-  cp "$HOME/.config/tmux/.tmux.conf.local" \
+  cp "$DOTFILES_DIR/config/tmux/.tmux.conf.local" \
      "$HOME/.config/tmux/tmux.conf.local"
 fi
 
