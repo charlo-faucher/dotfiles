@@ -3,6 +3,6 @@ set -euo pipefail
 
 echo ">>> Installing base packages for Arch..."
 
-sudo pacman -Syu --noconfirm
-sudo pacman -S --noconfirm git stow zsh tmux neovim fzf ripgrep curl wget
+pacman -Syu --noconfirm
+pacman -S --noconfirm sudo git stow zsh tmux neovim fzf ripgrep curl wget
 
