@@ -53,8 +53,8 @@ stow -d "$DOTFILES_DIR/config" -t $HOME zsh nvim
 
 echo ">>> Ensuring tmux configuration..."
 if [ ! -f "$HOME/.config/tmux/tmux.conf" ]; then
-  ln -s "$DOTFILES_DIR/config/tmux/.tmux.conf" \
-     "$HOME/.config/tmux/tmux.conf"
+  ln -s "$HOME/.config/tmux/tmux.conf" \
+     "$DOTFILES_DIR/config/tmux/.tmux.conf"
 fi
 
 if [ ! -f "$HOME/.config/tmux/tmux.conf.local" ]; then
