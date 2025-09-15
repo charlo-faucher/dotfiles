@@ -41,6 +41,7 @@ fi
 
 
 echo ">>> Deploying dotfiles..."
+echo "$DOTFILES_DIR"
 cd "$DOTFILES_DIR"
 stow -d "$DOTFILES_DIR/config" -t $HOME zsh nvim
 
