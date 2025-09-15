@@ -48,7 +48,7 @@ fi
 
 echo ">>> Deploying dotfiles with stow..."
 cd "$DOTFILES_DIR"
-stow -d "$DOTFILES_DIR/config" -t $HOME zsh nvim
+stow -d "$DOTFILES_DIR/config" -t $HOME zsh nvim tmux
 
 
 echo ">>> Ensuring tmux configuration..."
