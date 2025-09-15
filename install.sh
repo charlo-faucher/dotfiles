@@ -56,7 +56,8 @@ if [ ! -f "$HOME/.config/tmux/tmux.conf.local" ]; then
   cp "$DOTFILES_DIR/config/tmux/.tmux.conf.local" \
      "$HOME/.config/tmux/tmux.conf.local"
 fi
-
+cd "$HOME"
+tree -a
 
 echo ">>> Done! Restart your shell to apply changes."
 
