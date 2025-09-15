@@ -41,17 +41,17 @@ fi
 
 
 echo ">>> Deploying dotfiles..."
-echo "$DOTFILES_DIR"
 cd "$DOTFILES_DIR"
+echo "stow"
 stow -d "$DOTFILES_DIR/config" -t $HOME zsh nvim
-
+echo "mkdir"
 mkdir -p "$HOME/.config/tmux"
-
+echo "first if"
 if [ ! -f "$HOME/.config/tmux/tmux.conf" ]; then
   ln -s "$DOTFILES_DIR/config/tmux/.tmux/.tmux.conf" \
      "$HOME/.config/tmux/tmux.conf" 
 fi
-
+echo "sec if"
 if [ ! -f "$HOME/.config/tmux/tmux.conf.local" ]; then
   cp "$DOTFILES_DIR/config/tmux/.tmux.conf.local" \
      "$HOME/.config/tmux/tmux.conf.local"
