@@ -33,25 +33,16 @@ git -C "$DOTFILES_DIR" submodule update --init --recursive
 
 
 echo ">>> Setting zsh as default shell (if available)..."
-if command -v zsh >/dev/null; then
-  ZSH_PATH="$(command -v zsh)"
-  if ! grep -q "$ZSH_PATH" /etc/shells; then
-    echo "$ZSH_PATH" | sudo tee -a /etc/shells >/dev/null
-  fi
-  if [ "$SHELL" != "$ZSH_PATH" ]; then
-    chsh -s "$ZSH_PATH" || true
-  fi
-else
-  echo ">>> zsh not installed, skipping default shell change."
+if command -v zsh >/dev/null 2>&1; then
+    echo "Setting default shell to zsh..."
+    ZSH_PATH="$(command -v zsh)"
+    chsh -s "$(which zsh)" || true
 fi
 
 
-echo ">>> Deploying dotfiles with stow..."
+echo ">>> Deploying dotfiles..."
 cd "$DOTFILES_DIR"
 stow -d "$DOTFILES_DIR/config" -t $HOME zsh nvim
-
-
-echo ">>> Ensuring tmux configuration..."
 
 mkdir -p "$HOME/.config/tmux"
 
