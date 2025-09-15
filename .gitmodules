@@ -1,6 +1,3 @@
 [submodule "config/zsh/.config/oh-my-zsh"]
 	path = config/zsh/.config/oh-my-zsh
 	url = https://github.com/ohmyzsh/ohmyzsh.git
-[submodule "config/tmux/.config/--force"]
-	path = config/tmux/.config/--force
-	url = https://github.com/gpakosz/.tmux.git
