@@ -1,57 +1,50 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-set -e
+DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-cd "$DOTFILES_DIR"
-
-echo "Detecting OS..."
+echo ">>> Detecting OS..."
 case "$(uname -s)" in
   Linux*)
     if [ -f /etc/arch-release ]; then
-      echo "ARCH installation!"
+      echo ">>> Running Arch setup..."
       bash "$DOTFILES_DIR/setup/base/arch.sh"
-    elif [ -f /etc/lsb-release ]; then
-      echo "Ubuntu installation!"
+    elif command -v lsb_release >/dev/null && lsb_release -is | grep -qi ubuntu; then
+      echo ">>> Running Ubuntu setup..."
       bash "$DOTFILES_DIR/setup/base/ubuntu.sh"
     else
-      echo "Unsupported Linux distro"
-      exit 1
+      echo ">>> Unsupported Linux distribution"
     fi
     ;;
   Darwin*)
-    echo "MacOS installation!"
+    echo ">>> Running macOS setup..."
     bash "$DOTFILES_DIR/setup/base/mac.sh"
     ;;
   *)
-    echo "Unsupported OS"
+    echo ">>> Unsupported OS"
     exit 1
     ;;
 esac
 
-echo "Setting up zsh as default shell..."
+echo ">>> Initializing submodules..."
+git -C "$DOTFILES_DIR" submodule update --init --recursive
 
-# Prefer common zsh locations over /usr/sbin/zsh
-if [ -x /bin/zsh ]; then
-  ZSH_PATH=/bin/zsh
-elif [ -x /usr/bin/zsh ]; then
-  ZSH_PATH=/usr/bin/zsh
-elif [ -x /usr/local/bin/zsh ]; then
-  ZSH_PATH=/usr/local/bin/zsh
+echo ">>> Setting zsh as default shell (if available)..."
+if command -v zsh >/dev/null; then
+  ZSH_PATH="$(command -v zsh)"
+  if ! grep -q "$ZSH_PATH" /etc/shells; then
+    echo "$ZSH_PATH" | sudo tee -a /etc/shells >/dev/null
+  fi
+  if [ "$SHELL" != "$ZSH_PATH" ]; then
+    chsh -s "$ZSH_PATH" || true
+  fi
 else
-  # fallback (whatever which finds)
-  ZSH_PATH=$(command -v zsh)
+  echo ">>> zsh not installed, skipping default shell change."
 fi
 
-# Ensure it's listed in /etc/shells
-if ! grep -qx "$ZSH_PATH" /etc/shells; then
-  echo "$ZSH_PATH" | sudo tee -a /etc/shells
-fi
+echo ">>> Deploying dotfiles with stow..."
+cd "$DOTFILES_DIR"
+stow -t "$HOME" config
 
-# Change default shell
-chsh -s "$ZSH_PATH"
+echo ">>> Done! Restart your shell to apply changes."
 
-echo "Default shell set to: $ZSH_PATH"
-
-echo "Deploying dotfiles with stow..."
-stow -d "$DOTFILES_DIR/config" -t $HOME zsh nvim tmux
