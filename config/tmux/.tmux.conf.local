@@ -6,6 +6,10 @@
 #         without any warranty.
 #         Copyright 2012— Gregory Pakosz (@gpakosz).
 
+# SHELL
+
+set-option -g default-shell /bin/zsh
+set-option -g default-command /bin/zsh
 
 # -- bindings ------------------------------------------------------------------
 
