@@ -14,7 +14,7 @@ if [ ! -f "$HOME/.config/tmux/tmux.conf" ]; then
 fi
 
 if [ ! -f "$HOME/.config/tmux/tmux.conf.local" ]; then
-  cp "$DOTFILES_DIR/config/tmux/.tmux.conf.local" \
+  ln -s "$DOTFILES_DIR/config/tmux/.tmux.conf.local" \
      "$HOME/.config/tmux/tmux.conf.local"
 fi
 
