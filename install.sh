@@ -41,7 +41,7 @@ fi
 
 echo ">>> Deploying dotfiles..."
 cd "$DOTFILES_DIR"
-bash ./link.sh
+bash "$DOTFILES_DIR/link.sh"
 cd "$HOME"
 
 echo ">>> Done! Restart your shell to apply changes."
